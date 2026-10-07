@@ -4,7 +4,9 @@ Local [agent-runtime-protocol](https://github.com/egao1980/agent-runtime-protoco
 
 Suspend persists the host workspace and journals a `runtime-transition`. Resume starts a new container on the same mounts. **No CRIU.** CNI does not enforce host/port — call `podman-runtime-assert-egress`.
 
-Tests inject `invoke-fn`. Podman does not need to be installed.
+Unit tests inject `invoke-fn`. `examples/lifecycle.lisp` calls the `podman` on `PATH`
+(image `docker.io/library/ubuntu:24.04`, workspace under `$HOME` — a podman
+machine does not mount `/tmp`). The demo test skips when `podman` is absent.
 
 ```lisp
 (asdf:load-system "agent-runtime-backend-podman")
